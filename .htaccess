@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteBase /
+
+RewriteRule (css|js)$ - [NC,L]
+
+RewriteRule ^(.+)$ index.php [L]
