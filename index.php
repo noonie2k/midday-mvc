@@ -5,36 +5,58 @@
 </head>
 <body>
 <?php
-    $requestUri = $_SERVER['REQUEST_URI'];
+function __autoload($className)
+{
+    $fileName = "{$className}.php";
+    @include_once $fileName;
+}
 
-    $requestParts = explode('/', $requestUri);
-    array_shift($requestParts);
+$includePath = explode(PATH_SEPARATOR, get_include_path());
+$includePath[] = realpath(dirname(__FILE__)) . '/app/controllers';
+set_include_path(implode(PATH_SEPARATOR, $includePath));
 
-    $controller = array_shift($requestParts);
-    $action = array_shift($requestParts);
+$requestUri = $_SERVER['REQUEST_URI'];
 
-    $params = array();
-    foreach ($requestParts as $part) {
-        $params[] = $part;
-    }
+$requestParts = explode('/', $requestUri);
+array_shift($requestParts);
 
-    if (empty($controller)) $controller = 'home';
-    if (empty($action))     $action = 'index';
+$controller = array_shift($requestParts);
+$action = array_shift($requestParts);
 
-    $viewFile = "app/views/${controller}/${action}.php";
-    if (file_exists($viewFile)) {
-        include $viewFile;
-    } else {
-        $viewFile = 'app/views/error/index.php';
+$params = array();
+foreach ($requestParts as $part) {
+    $params[] = $part;
+}
 
-        $routes = json_decode(file_get_contents('app/config/routes.json'));
-        foreach ($routes as $route) {
-            if (preg_match($route->pattern, $requestUri) === 1) {
-                $viewFile = "app/views/{$route->controller}/{$route->action}.php";
+if (empty($controller)) $controller = 'home';
+if (empty($action))     $action = 'index';
+
+$controllerClass = ucfirst($controller) . 'Controller';
+if (class_exists($controllerClass)) {
+    $controllerObject = new $controllerClass();
+    $actionMethod = $action . 'Action';
+    $controllerObject->$actionMethod();
+} else {
+    $routes = json_decode(file_get_contents('app/config/routes.json'));
+    $found = false;
+    foreach ($routes as $route) {
+        if (preg_match($route->pattern, $requestUri) === 1) {
+            $controllerClass = ucfirst($route->controller) . 'Controller';
+            if (class_exists($controllerClass)) {
+                $controllerObject = new $controllerClass();
+                $actionMethod = $route->action . 'Action';
+                $controllerObject->$actionMethod();
+                $found = true;
+                break;
             }
         }
-        include $viewFile;
     }
+
+    if ($found === false) {
+        $controller = new ErrorController();
+        $controller->indexAction();
+    }
+}
 ?>
 </body>
 </html>
