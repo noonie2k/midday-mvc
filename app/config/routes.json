@@ -1,6 +1,6 @@
 {
     "home": {
-        "pattern": "/^\\/(home)?(\\/index)?\\/?$/",
+        "pattern": "/^\\/(?<controller>home)?(\\/?<action>index)?\\/?$/",
         "controller": "home",
         "action": "index"
     }
