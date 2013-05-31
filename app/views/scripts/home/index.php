@@ -1,0 +1,1 @@
+<div>This is something from the controller - <?php echo $this->data['test']; ?></div>

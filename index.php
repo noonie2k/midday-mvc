@@ -15,5 +15,5 @@ $includePath[] = realpath(dirname(__FILE__)) . '/app/controllers';
 $includePath[] = realpath(dirname(__FILE__)) . '/app/library';
 set_include_path(implode(PATH_SEPARATOR, $includePath));
 
-$router = new Router($_SERVER['REQUEST_URI']);
-$router->route();
+$router = new Router();
+$router->route($_SERVER['REQUEST_URI']);

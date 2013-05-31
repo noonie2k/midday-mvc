@@ -1,13 +1,20 @@
 <?php
 
+/**
+ * Class Router
+ * Routes traffic from a url to the correct controller/action
+ *
+ * @package Routing
+ */
 class Router {
-    public function __construct($uri)
+    /**
+     * Route the given uri to a controller action
+     *
+     * @param string $uri URI to route
+     */
+    public function route($uri)
     {
         $this->_uri = $uri;
-    }
-
-    public function route()
-    {
         $simpleRoute = $this->_getSimpleRoute();
         $controllerClass = ucfirst($simpleRoute['controller']) . 'Controller';
         if (class_exists($controllerClass)) {
@@ -21,6 +28,20 @@ class Router {
         $errorController->index();
     }
 
+    /**
+     * Get the Route based on a simple /controller/action/params uri pattern
+     * Controller and Action default to Home and index respectively if not given
+     *
+     * <code>
+     *     return array(
+     *         'controller' => 'controllerName',
+     *         'action'     => 'actionName',
+     *         'params'     => array()
+     *     );
+     * </code>
+     *
+     * @return array
+     */
     protected function _getSimpleRoute()
     {
         $requestParts = explode('/', $this->_uri);
@@ -43,6 +64,7 @@ class Router {
             'params'     => $params
         );
     }
+
 
     protected $_uri = '';
 }
