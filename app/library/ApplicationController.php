@@ -38,7 +38,7 @@ class ApplicationController
      */
     public function content()
     {
-        $viewScript = 'app/views/scripts/' . lcfirst(str_replace('Controller', '', get_class($this))) . '/' . $this->_action . '.php';
+        $viewScript = 'app/views/scripts/' . lcfirst(str_replace('Controller', '', get_class($this))) . '/' . $this->_action . '.phtml';
         include $viewScript;
     }
 
@@ -47,7 +47,7 @@ class ApplicationController
      */
     protected function _renderLayout()
     {
-        include 'app/views/layouts/default.php';
+        include 'app/views/layouts/default.phtml';
     }
 
     /**
