@@ -1,1 +1,2 @@
-<div>This is something from the controller - <?php echo $this->data['test']; ?></div>
+<h1>Welcome to Midday MVC - A Minimal MVC Framework</h1>
+<div>Copyright &copy; 2013 <a href="mailto:adam.ian.noon@gmail.com">Adam Noon</a> All Rights Reserved</div>

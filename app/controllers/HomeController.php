@@ -1,12 +1,21 @@
 <?php
+/**
+ * Contains Class HomeController
+ *
+ * @package Controllers
+ */
 
-class HomeController extends ApplicationController {
+/**
+ * The Home Controller Class
+ *
+ * @package Controllers
+ */
+class HomeController extends ApplicationController
+{
+    /**
+     * Default/Index Action
+     */
     public function indexAction()
-    {
-        $this->data['test'] = 'Something cool';
-    }
-
-    public function contactAction()
     {
     }
 }

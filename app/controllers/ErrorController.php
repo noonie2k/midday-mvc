@@ -1,4 +1,9 @@
 <?php
+/**
+ * Contains the ErrorController Class
+ *
+ * @package Controllers
+ */
 
 /**
  * Class ErrorController

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><?php echo isset($this->view['title']) ? $this->view['title'] : 'MVC' ?></title>
+    <meta charset="utf-8" />
+
+    <title><?php echo isset($this->view['title']) ? $this->view['title'] : 'Midday MVC' ?></title>
 </head>
 <body>
     <?php echo $this->content(); ?>

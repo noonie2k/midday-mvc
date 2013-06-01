@@ -1,5 +1,11 @@
 <?php
 /**
+ * Contains the ApplicationController Class
+ *
+ * @package Controllers
+ */
+
+/**
  * Class ApplicationController
  * Parent class for all controllers
  *

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Contains the Router Class
+ *
+ * @package Routing
+ */
 
 /**
  * Class Router
@@ -65,6 +70,10 @@ class Router {
         );
     }
 
-
+    /**
+     * The URL being parsed
+     *
+     * @property string The URL being parsed
+     */
     protected $_uri = '';
 }
