@@ -14,29 +14,6 @@
 class Router {
     /**
      * Route the given uri to a controller action
-     *
-     * @param string $uri URI to route
-     */
-    public function route($uri)
-    {
-        $this->_uri = $uri;
-        $simpleRoute = $this->_getSimpleRoute();
-        $controllerClass = ucfirst($simpleRoute['controller']) . 'Controller';
-        if (class_exists($controllerClass)) {
-            $controller = new $controllerClass();
-            $action = $simpleRoute['action'];
-            $controller->$action();
-            return;
-        }
-
-        $errorController = new ErrorController();
-        $errorController->index();
-    }
-
-    /**
-     * Get the Route based on a simple /controller/action/params uri pattern
-     * Controller and Action default to Home and index respectively if not given
-     *
      * <code>
      *     return array(
      *         'controller' => 'controllerName',
@@ -45,35 +22,27 @@ class Router {
      *     );
      * </code>
      *
-     * @return array
+     * @param string $uri URI to route
+     * @return array Controller, Action & Params
      */
-    protected function _getSimpleRoute()
+    public function route($uri)
     {
-        $requestParts = explode('/', $this->_uri);
-        array_shift($requestParts);
+        $uriParts = array();
+        preg_match('/^\/([^\/]+)(?:\/([^\/]+))?(.+)?$/', $uri, $uriParts);
+        array_shift($uriParts);
 
-        $controller = array_shift($requestParts);
-        $action = array_shift($requestParts);
+        $controller = array_shift($uriParts);
+        $action = array_shift($uriParts);
+        $params = array_shift($uriParts);
 
-        $params = array();
-        foreach ($requestParts as $part) {
-            $params[] = $part;
-        }
-
-        if (empty($controller)) $controller = 'home';
-        if (empty($action))     $action = 'index';
+        if (!isset($controller)) $controller = 'home';
+        if (!isset($action))     $action     = 'index';
+        if (!isset($params))     $params     = array();
 
         return array(
-            'controller' => $controller,
-            'action'     => $action,
+            'controller' => ucfirst(strtolower($controller)) . 'Controller',
+            'action'     => strtolower($action),
             'params'     => $params
         );
     }
-
-    /**
-     * The URL being parsed
-     *
-     * @property string The URL being parsed
-     */
-    protected $_uri = '';
 }

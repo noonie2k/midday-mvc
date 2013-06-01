@@ -16,4 +16,9 @@ $includePath[] = realpath(dirname(__FILE__)) . '/app/library';
 set_include_path(implode(PATH_SEPARATOR, $includePath));
 
 $router = new Router();
-$router->route($_SERVER['REQUEST_URI']);
+$route = $router->route($_SERVER['REQUEST_URI']);
+
+if (class_exists($route['controller'])) {
+    $controller = new $route['controller']();
+    $controller->$route['action']();
+}
