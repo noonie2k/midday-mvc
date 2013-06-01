@@ -1,4 +1,6 @@
 <?php
+@include 'php52hacks.php';
+
 /**
  * Autoload source files
  *
