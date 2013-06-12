@@ -12,9 +12,9 @@ class AutoLoader
         foreach ($di as $file) {
             if ($file->isDir() && !$file->isLink() && !$file->isDot()) {
                 self::registerDirectory($file->getPathName());
-            } elseif (substr($file->getFilename(), -4 === '.php')) {
+            } elseif (substr($file->getFilename(), -4) === '.php') {
                 $className = substr($file->getFilename(), 0, -4);
-                AutoLoader::registerClass($className, $file->getPathname());
+                self::registerClass($className, $file->getPathname());
             }
         }
     }
@@ -26,7 +26,8 @@ class AutoLoader
      */
     public static function registerClass($className, $fileName)
     {
-        AutoLoader::$classNames[$className] = $fileName;
+        var_dump($className, $fileName);
+        self::$classNames[$className] = $fileName;
     }
 
     /**
@@ -36,8 +37,8 @@ class AutoLoader
      */
     public static function loadClass($className)
     {
-        if (isset(AutoLoader::$classNames[$className])) {
-            require_once(AutoLoader::$classNames[$className]);
+        if (isset(self::$classNames[$className])) {
+            require_once(self::$classNames[$className]);
         }
     }
 }
