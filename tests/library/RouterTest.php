@@ -40,4 +40,43 @@ class RouterTest extends PHPUnit_Framework_TestCase
             $router->route('/feed/item')
         );
     }
+
+    public function testNoParams()
+    {
+        $router = new Router();
+        $this->assertEquals(
+            array(
+                'controller' => 'FeedController',
+                'action'     => 'item',
+                'params'     => array()
+            ),
+            $router->route('/feed/item')
+        );
+    }
+
+    public function testSingleParam()
+    {
+        $router = new Router();
+        $this->assertEquals(
+            array(
+                'controller' => 'FeedController',
+                'action'     => 'item',
+                'params'     => array('1')
+            ),
+            $router->route('/feed/item/1')
+        );
+    }
+
+    public function testMultipleParams()
+    {
+        $router = new Router();
+        $this->assertEquals(
+            array(
+                'controller' => 'FeedController',
+                'action'     => 'item',
+                'params'     => array('1','2')
+            ),
+            $router->route('/feed/item/1/2')
+        );
+    }
 }
