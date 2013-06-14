@@ -26,7 +26,6 @@ class AutoLoader
      */
     public static function registerClass($className, $fileName)
     {
-        var_dump($className, $fileName);
         self::$classNames[$className] = $fileName;
     }
 
