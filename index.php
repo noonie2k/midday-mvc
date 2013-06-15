@@ -22,5 +22,5 @@ $route = $router->route($_SERVER['REQUEST_URI']);
 
 if (class_exists($route['controller'])) {
     $controller = new $route['controller']();
-    $controller->$route['action']();
+    $controller->$route['action']($route['params']);
 }

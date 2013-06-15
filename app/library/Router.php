@@ -28,24 +28,21 @@ class Router
      */
     public function route($uri)
     {
-        $uriParts = array();
-        preg_match('/^\/([^\/]+)(?:\/([^\/]+))?(.+)?$/', $uri, $uriParts);
+        $uriParts = explode('/', $uri);
         array_shift($uriParts);
 
         $controller = array_shift($uriParts);
         $action     = array_shift($uriParts);
-        $params     = array_shift($uriParts);
+        $params     = $uriParts;
 
-        if (!isset($controller)) $controller = 'home';
-        if (!isset($action))     $action     = 'index';
-        if (!isset($params))     $params     = '';
-
-        $paramList = $this->_parseParams($params);
+        if (empty($controller)) $controller = 'home';
+        if (empty($action))     $action     = 'index';
+        if (empty($params))     $params     = array();
 
         return array(
             'controller' => ucfirst(strtolower($controller)) . 'Controller',
             'action'     => strtolower($action),
-            'params'     => $paramList
+            'params'     => $params
         );
     }
 
