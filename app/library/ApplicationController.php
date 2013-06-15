@@ -22,8 +22,8 @@ class ApplicationController
     public function __call($action, $params)
     {
         $method = $action . 'Action';
+        $this->_action = $action;
         if (method_exists($this, $method)) {
-            $this->_action = $action;
             $this->$method();
         } else {
             $controller = new ErrorController();
