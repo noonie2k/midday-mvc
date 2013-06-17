@@ -11,7 +11,8 @@
  *
  * @package Controllers
  */
-class ErrorController extends ApplicationController {
+class ErrorController extends ApplicationController
+{
     /**
      * Index Action
      */

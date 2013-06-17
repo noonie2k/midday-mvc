@@ -45,21 +45,4 @@ class Router
             'params'     => $params
         );
     }
-
-    /**
-     * Parse Parameter part of the URI into a parameter list
-     *
-     * @param string $params The Parameter List
-     * @return array List of parameter values
-     */
-    protected function _parseParams($params)
-    {
-        $paramList = array();
-        if (!empty($params)) {
-            preg_match_all('/[^\/]+/', $params, $paramList);
-            $paramList = array_shift($paramList);
-            return $paramList;
-        }
-        return $paramList;
-    }
 }
