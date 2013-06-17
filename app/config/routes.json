@@ -1,0 +1,7 @@
+{
+    "example": {
+        "route": "/feed/(?P<params>.+)?",
+        "controller": "Blog",
+        "action": "show"
+    }
+}

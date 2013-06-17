@@ -17,7 +17,11 @@ $includePath[] = realpath(dirname(__FILE__)) . '/app/controllers';
 $includePath[] = realpath(dirname(__FILE__)) . '/app/library';
 set_include_path(implode(PATH_SEPARATOR, $includePath));
 
-$router = new Router();
+$routerConfig = json_decode(
+    file_get_contents(realpath(dirname(__FILE__)) . '/app/config/routes.json'),
+    true
+);
+$router = new Router($routerConfig);
 $route = $router->route($_SERVER['REQUEST_URI']);
 
 if (class_exists($route['controller'])) {
