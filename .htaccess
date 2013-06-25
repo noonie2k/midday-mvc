@@ -1,6 +1,5 @@
-RewriteEngine On
+RewriteEngine on
 RewriteBase /
 
-RewriteRule (css|js|ico)$ - [NC,L]
-
-RewriteRule ^(.+)$ index.php [L]
+RewriteRule (css|js|img)/(.+)$ app/public/$1/$2 [NC,L]
+RewriteRule ^.+$ index.php [L]
