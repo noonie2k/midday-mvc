@@ -41,6 +41,32 @@ class RouterTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testGivenControllerWithDashesAndDefaultAction()
+    {
+        $router = new Router();
+        $this->assertEquals(
+            array(
+                'controller' => 'AboutMeController',
+                'action'     => 'index',
+                'params'     => array()
+            ),
+            $router->route('/about-me')
+        );
+    }
+
+    public function testGivenControllerWithDashesAndAction()
+    {
+        $router = new Router();
+        $this->assertEquals(
+            array(
+                'controller' => 'AboutMeController',
+                'action'     => 'childhoodLife',
+                'params'     => array()
+            ),
+            $router->route('/about-me/childhood-life')
+        );
+    }
+
     public function testNoParams()
     {
         $router = new Router();
@@ -142,4 +168,25 @@ class RouterTest extends PHPUnit_Framework_TestCase
             $router->route('/althomesomethingelse')
         );
     }
+
+    public function testDefinedRouteWithDashes() {
+        $routingConfig = array(
+            'call-me' => array(
+                'route'      => '/call-me',
+                'controller' => 'Home',
+                'action'     => 'callMe'
+            )
+        );
+
+        $router = new Router($routingConfig);
+        $this->assertEquals(
+            array(
+                'controller' => 'HomeController',
+                'action'     => 'callMe',
+                'params'     => array()
+            ),
+            $router->route('/call-me')
+        );
+    }
 }
+

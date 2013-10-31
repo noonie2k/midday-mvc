@@ -62,17 +62,17 @@ class Router
     {
         $uriParts = explode('/', $this->_uri);
         array_shift($uriParts);
-        $controller = array_shift($uriParts);
-        $action = array_shift($uriParts);
+        $controller = $this->_convertCase(array_shift($uriParts));
+        $action = $this->_convertCase(array_shift($uriParts));
         $params = $uriParts;
 
-        if (empty($controller)) $controller = 'home';
+        if (empty($controller)) $controller = 'Home';
         if (empty($action)) $action = 'index';
         if (empty($params)) $params = array();
 
         return array(
-            'controller' => ucfirst(strtolower($controller)) . 'Controller',
-            'action' => strtolower($action),
+            'controller' => $controller . 'Controller',
+            'action' => lcfirst($action),
             'params' => $params
         );
     }
@@ -109,6 +109,27 @@ class Router
         }
 
         return $route;
+    }
+
+    /**
+     * Convert a dashed string to Camel Case (upper or lower depending the option passed)
+     *
+     * @param string $unconverted Unconverted string
+     * @return string Camel Case String
+     */
+    protected function _convertCase($unconverted)
+    {
+        $converted = '';
+        if (strpos($unconverted, '-') !== false) {
+            $parts = explode('-', $unconverted);
+            foreach ($parts as $part) {
+                $converted .= ucfirst($part);
+            }
+        } else {
+            $converted = ucfirst($unconverted);
+        }
+
+        return $converted;
     }
 
     /**
