@@ -11,7 +11,7 @@
  *
  * @package Controllers
  */
-class ErrorController extends ApplicationController
+class ErrorController extends Midday\ApplicationController
 {
     /**
      * Index Action

@@ -10,7 +10,7 @@
  *
  * @package Controllers
  */
-class HomeController extends ApplicationController
+class HomeController extends Midday\ApplicationController
 {
     /**
      * Default/Index Action

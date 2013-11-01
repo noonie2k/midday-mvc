@@ -4,7 +4,7 @@ class RouterTest extends PHPUnit_Framework_TestCase
 {
     public function testDefaultControllerAndAction()
     {
-        $router = new Router();
+        $router = new Midday\Router();
         $this->assertEquals(
             array(
                 'controller' => 'HomeController',
@@ -17,7 +17,7 @@ class RouterTest extends PHPUnit_Framework_TestCase
 
     public function testGivenControllerAndDefaultAction()
     {
-        $router = new Router();
+        $router = new Midday\Router();
         $this->assertEquals(
             array(
                 'controller' => 'FeedController',
@@ -30,7 +30,7 @@ class RouterTest extends PHPUnit_Framework_TestCase
 
     public function testGivenControllerAndAction()
     {
-        $router = new Router();
+        $router = new Midday\Router();
         $this->assertEquals(
             array(
                 'controller' => 'FeedController',
@@ -43,7 +43,7 @@ class RouterTest extends PHPUnit_Framework_TestCase
 
     public function testGivenControllerWithDashesAndDefaultAction()
     {
-        $router = new Router();
+        $router = new Midday\Router();
         $this->assertEquals(
             array(
                 'controller' => 'AboutMeController',
@@ -56,7 +56,7 @@ class RouterTest extends PHPUnit_Framework_TestCase
 
     public function testGivenControllerWithDashesAndAction()
     {
-        $router = new Router();
+        $router = new Midday\Router();
         $this->assertEquals(
             array(
                 'controller' => 'AboutMeController',
@@ -69,7 +69,7 @@ class RouterTest extends PHPUnit_Framework_TestCase
 
     public function testNoParams()
     {
-        $router = new Router();
+        $router = new Midday\Router();
         $this->assertEquals(
             array(
                 'controller' => 'FeedController',
@@ -82,7 +82,7 @@ class RouterTest extends PHPUnit_Framework_TestCase
 
     public function testSingleParam()
     {
-        $router = new Router();
+        $router = new Midday\Router();
         $this->assertEquals(
             array(
                 'controller' => 'FeedController',
@@ -95,7 +95,7 @@ class RouterTest extends PHPUnit_Framework_TestCase
 
     public function testMultipleParams()
     {
-        $router = new Router();
+        $router = new Midday\Router();
         $this->assertEquals(
             array(
                 'controller' => 'FeedController',
@@ -116,7 +116,7 @@ class RouterTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $router = new Router($routingConfig);
+        $router = new Midday\Router($routingConfig);
         $this->assertEquals(
             array(
                 'controller' => 'HomeController',
@@ -137,7 +137,7 @@ class RouterTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $router = new Router($routingConfig);
+        $router = new Midday\Router($routingConfig);
         $this->assertEquals(
             array(
                 'controller' => 'HomeController',
@@ -158,7 +158,7 @@ class RouterTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $router = new Router($routingConfig);
+        $router = new Midday\Router($routingConfig);
         $this->assertEquals(
             array(
                 'controller' => 'AlthomesomethingelseController',
@@ -169,7 +169,8 @@ class RouterTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testDefinedRouteWithDashes() {
+    public function testDefinedRouteWithDashes()
+    {
         $routingConfig = array(
             'call-me' => array(
                 'route'      => '/call-me',
@@ -178,7 +179,7 @@ class RouterTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $router = new Router($routingConfig);
+        $router = new Midday\Router($routingConfig);
         $this->assertEquals(
             array(
                 'controller' => 'HomeController',
@@ -189,4 +190,3 @@ class RouterTest extends PHPUnit_Framework_TestCase
         );
     }
 }
-
