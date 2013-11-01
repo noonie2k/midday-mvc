@@ -1,4 +1,4 @@
-<?php
+<?php namespace Midday;
 /**
  * Contains the ApplicationController Class
  *
