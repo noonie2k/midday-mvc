@@ -1,4 +1,4 @@
-<?php namespace Midday;
+<?php
 /**
  * Contains the ApplicationController Class
  *
@@ -28,6 +28,7 @@ class ApplicationController
         } else {
             $controller = new ErrorController();
             $controller->index();
+            die();
         }
 
         $this->_renderLayout();
@@ -38,7 +39,8 @@ class ApplicationController
      */
     public function content()
     {
-        $viewScript = 'app/views/scripts/' . lcfirst(str_replace('Controller', '', get_class($this))) . '/' . $this->_action . '.phtml';
+        $actionPartial = strtolower(preg_replace('/([A-Z])/', '-\1', $this->_action));
+        $viewScript = 'app/views/scripts/' . lcfirst(str_replace('Controller', '', get_class($this))) . '/' . $actionPartial . '.phtml';
         include $viewScript;
     }
 
