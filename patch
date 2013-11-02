@@ -1,0 +1,53 @@
+diff --git a/library/Midday/ApplicationController.php b/library/Midday/ApplicationController.php
+index 51ce658..6f29fee 100644
+--- a/library/Midday/ApplicationController.php
++++ b/library/Midday/ApplicationController.php
+@@ -26,7 +26,7 @@ class ApplicationController
+         if (method_exists($this, $method)) {
+             $this->$method();
+         } else {
+-            $controller = new ErrorController();
++            $controller = new \ErrorController();
+             $controller->index();
+             die();
+         }
+diff --git a/library/Midday/AutoLoader.php b/library/Midday/AutoLoader.php
+index 9c5c0d9..a7f1ef4 100644
+--- a/library/Midday/AutoLoader.php
++++ b/library/Midday/AutoLoader.php
+@@ -6,6 +6,12 @@ class AutoLoader
+ {
+     public static function loader($className)
+     {
+-        require_once str_replace('\\', DIRECTORY_SEPARATOR, $className) . '.php';
++        $fileName = str_replace('\\', DIRECTORY_SEPARATOR, $className) . '.php';
++        if (stream_resolve_include_path($fileName)) {
++            require_once $fileName;
++        } else {
++            var_dump($fileName, get_include_path());
++            throw new AutoLoader\Exception('Class not found - ' . $className);
++        }
+     }
+ }
+diff --git a/library/Midday/AutoLoader/Exception.php b/library/Midday/AutoLoader/Exception.php
+new file mode 100644
+index 0000000..aefba5b
+--- /dev/null
++++ b/library/Midday/AutoLoader/Exception.php
+@@ -0,0 +1,16 @@
++<?php namespace Midday\AutoLoader;
++/**
++ * Contains Class Exeption
++ *
++ * @package Routing
++ */
++
++/**
++ * The AutoLoader Exception class
++ *
++ * @package Routing
++ */
++class Exception extends \Exception
++{
++
++}

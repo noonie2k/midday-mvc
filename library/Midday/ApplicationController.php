@@ -26,7 +26,7 @@ class ApplicationController
         if (method_exists($this, $method)) {
             $this->$method();
         } else {
-            $controller = new ErrorController();
+            $controller = new \ErrorController();
             $controller->index();
             die();
         }
