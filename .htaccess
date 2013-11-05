@@ -2,5 +2,6 @@ RewriteEngine on
 RewriteBase /
 
 RewriteRule (robots)\.txt app/public/$1.txt [NC,L]
+RewriteRule sitemap.xml app/public/sitemap.xml [NC,L]
 RewriteRule (css|js|img)/(.+)$ app/public/$1/$2 [NC,L]
 RewriteRule ^.+$ index.php [L]
