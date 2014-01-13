@@ -11,7 +11,7 @@ cp -r ${library_path}/app/controllers/* app/controllers/
 
 # Library Paths
 if [ -z library ]; then mkdir library; fi
-rm -rf library/Midday && ln -s ${library_path}/library/Midday library/Midday
+rm -rf library/Midday && ln -s ../${library_path}/library/Midday library/Midday
 
 # Root Paths
 rm -f index.php && ln -s ${library_path}/index.php .
