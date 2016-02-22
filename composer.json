@@ -1,0 +1,18 @@
+{
+    "name": "noonie2k/midday-mvc",
+    "description": "Simple MVC Framework",
+    "authors": [
+        {
+            "name": "Adam Noon",
+            "email": "adam.ian.noon@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Midday\\": "library/Midday/" }
+    },
+    "require": {
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.8.*"
+    }
+}

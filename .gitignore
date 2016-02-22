@@ -3,3 +3,7 @@
 
 # PHP Documentation
 docs
+
+# Composer
+composer.lock
+/vendor/
